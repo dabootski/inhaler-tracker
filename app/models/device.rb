@@ -11,7 +11,8 @@ class Device < ActiveRecord::Base
 
   belongs_to :account
 
-  has_many :events
+  has_many :events,
+    -> { order("created_at DESC") }
 
   validates :name, :presence => true
   validates :mac_address, :presence => true

@@ -2,7 +2,6 @@ class DevicesController < ApplicationController
 
   def show
     @device = Device.find(params[:id])
-    @events = @device.events.order("created_at DESC")
   end
 
   def update
