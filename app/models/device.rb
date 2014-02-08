@@ -14,6 +14,10 @@ class Device < ActiveRecord::Base
   has_many :events,
     -> { order("created_at DESC") }
 
+  has_many :notifications
+  has_many :email_notifications,
+    :source => "EmailNotification"
+
   validates :name, :presence => true
   validates :mac_address, :presence => true
   validates :loop_timeout, :presence => true

@@ -1,0 +1,49 @@
+.row
+  %div.col-lg-12
+    %ul.breadcrumb
+      %li
+        = link_to "Home", root_url
+      %li
+        = link_to "Accounts", accounts_url
+      %li
+        = link_to @account.username, account_url(@account)
+      %li
+        = link_to @device.name, device_url(@device)
+      %li.active= "Notifications"
+    .page-header
+      %h1#tables= "Notifications - #{@notification.name}"
+    - if @notification.errors.any?
+      .alert.alert-dismissable.alert-danger
+        %button.close{:type => "button", :"data-dismiss" => "alert"}
+        %h4= "Could not save"
+        %ul
+          - @notification.errors.full_messages.each do |msg|
+            %li= msg
+    - if flash[:notice]
+      .alert.alert-dismissable.alert-success
+        %button.close{:type => "button", :"data-dismiss" => "alert"}
+        = flash[:notice]
+
+    = form_for [@device, @notification], :html => { :class => "form-horizontal" } do |f|
+      %fieldset
+        .form-group{:class => @notification.errors[:name].any? ? "has-error" : ""}
+          = f.label :name, :class => "col-lg-2 control-label"
+          .col-lg-10
+            = f.text_field :name, :class => "form-control", :placeholder => "Notification name"
+        .form-group{:class => @notification.errors[:active].any? ? "has-error" : ""}
+          = f.label :active, :class => "col-lg-2 control-label"
+          .col-lg-10
+            = f.check_box :active, :class => "form-control", :placeholder => "Timeout in seconds"
+        .form-group{:class => @notification.errors[:timeout].any? ? "has-error" : ""}
+          = f.label :timeout, :class => "col-lg-2 control-label"
+          .col-lg-10
+            = f.text_field :timeout, :class => "form-control", :placeholder => "Time between notifications in minutes"
+        .form-group{:class => @notification.errors[:email].any? ? "has-error" : ""}
+          = f.label :email, :class => "col-lg-2 control-label"
+          .col-lg-10
+            = f.text_field :email, :class => "form-control", :placeholder => "Time between notifications in minutes"
+        .form-group
+          .col-lg-10.col-lg-offset-2
+            %button.btn.btn-primary{:type => "submit"}= "Submit"
+            %button.btn.btn-default= "Cancel" 
+

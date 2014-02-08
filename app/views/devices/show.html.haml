@@ -21,6 +21,17 @@
       .alert.alert-dismissable.alert-success
         %button.close{:type => "button", :"data-dismiss" => "alert"}
         = flash[:notice]
+.row
+  %div.col-lg-6
+    %div
+      /
+        %ul.nav.nav-tabs
+          %li.dropdown
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"}= "New Email Notification"
+              %li
+                %a{:href => "#"}= "New Text Notification"
 
 .row
   %div.col-lg-6
@@ -42,6 +53,29 @@
               .col-lg-10.col-lg-offset-2
                 %button.btn.btn-primary{:type => "submit"}= "Submit"
                 %button.btn.btn-default= "Cancel" 
+    .panel.panel-default
+      .panel-heading
+        %h4#tables= "Notifications"
+      .panel-body
+        %div.bs-example.table-responsive
+          %table.table.table-striped.table-hover
+            %tbody
+              %tr
+                %th= "Type"
+                %th= "Name"
+                %th= "Active?"
+                %th= ""
+              - @device.notifications.each do |n|
+                %tr>
+                  %td= n.display_name
+                  %td= n.name
+                  %td= n.active?
+                  %td= link_to "Settings", edit_device_email_notification_path(@device, n)
+        %div
+          = link_to "New Email Notification", new_device_email_notification_path(@device)
+          %br
+          = link_to "New Text Notification", new_device_email_notification_path(@device)
+
   %div.col-lg-6
     .panel.panel-default
       .panel-heading
@@ -80,13 +114,11 @@
           %table.table.table-striped.table-hover
             %tbody
               %tr
-                %th= "ID"
                 %th= "Title"
                 %th= "Description"
                 %th= "Time"
               - @device.events.each do |event|
                 %tr>
-                  %td= link_to event.id, "#"
                   %td= link_to event.title, "#"
                   %td= event.description
                   %td= l(event.created_at, :format => :standard)
