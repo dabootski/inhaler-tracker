@@ -57,6 +57,14 @@
               = f.label :notification_timeout, :class => "col-lg-2 control-label"
               .col-lg-10
                 = f.text_field :notification_timeout, :class => "form-control", :placeholder => "Timeout in seconds"
+            .form-group{:class => @device.errors[:settings_refresh_timeout].any? ? "has-error" : ""}
+              = f.label :settings_refresh_timeout, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :settings_refresh_timeout, :class => "form-control", :placeholder => "Timeout in seconds"
+            .form-group{:class => @device.errors[:range_threshold].any? ? "has-error" : ""}
+              = f.label :range_threshold, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :range_threshold, :class => "form-control", :placeholder => "Minimum distance in inches"
             .form-group
               .col-lg-10.col-lg-offset-2
                 %button.btn.btn-primary{:type => "submit"}= "Submit"
@@ -76,7 +84,7 @@
                 %th= "Title"
                 %th= "Description"
                 %th= "Time"
-              - @device.events.each do |event|
+              - @events.each do |event|
                 %tr>
                   %td= link_to event.id, "#"
                   %td= link_to event.title, "#"

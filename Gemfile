@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0.beta1'
@@ -37,10 +38,12 @@ gem 'spring',        group: :development
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use puma as the app server
-gem 'puma'
+#gem 'puma'
 
 gem 'haml'
 gem 'html2haml'
+
+gem 'rails_12factor', group: :production
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

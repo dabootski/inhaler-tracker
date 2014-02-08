@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :devices do
       member do
         get :settings
+        get :create_event
       end
     end
 

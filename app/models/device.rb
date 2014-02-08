@@ -17,8 +17,14 @@ class Device < ActiveRecord::Base
   validates :mac_address, :presence => true
   validates :loop_timeout, :presence => true
   validates :notification_timeout, :presence => true
+  validates :settings_refresh_timeout, :presence => true
+  validates :range_threshold, :presence => true
 
-  store_accessor :settings, :loop_timeout, :notification_timeout
+  store_accessor :settings,
+    :loop_timeout,
+    :notification_timeout,
+    :settings_refresh_timeout,
+    :range_threshold
 
   def to_settings
     settings.keys.map do |k|
