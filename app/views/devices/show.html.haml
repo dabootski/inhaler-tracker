@@ -1,0 +1,85 @@
+.row
+  %div.col-lg-12
+    %ul.breadcrumb
+      %li
+        = link_to "Home", root_url
+      %li
+        = link_to "Accounts", accounts_url
+      %li
+        = link_to @account.username, account_url(@account)
+      %li.active= @device.name
+    .page-header
+      %h1#tables= "Devices - #{@device.name}"
+    - if @device.errors.any?
+      .alert.alert-dismissable.alert-danger
+        %button.close{:type => "button", :"data-dismiss" => "alert"}
+        %h4= "Could not save"
+        %ul
+          - @device.errors.full_messages.each do |msg|
+            %li= msg
+    - if flash[:notice]
+      .alert.alert-dismissable.alert-success
+        %button.close{:type => "button", :"data-dismiss" => "alert"}
+        = flash[:notice]
+
+.row
+  %div.col-lg-6
+    .panel.panel-default
+      .panel-heading
+        %h4#tables= "Basic Info"
+      .panel-body
+        = form_for @device, :html => { :class => "form-horizontal" } do |f|
+          %fieldset
+            .form-group{:class => @device.errors[:name].any? ? "has-error" : ""}
+              = f.label :name, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :name, :class => "form-control", :placeholder => "Name"
+            .form-group{:class => @device.errors[:mac_address].any? ? "has-error" : ""}
+              = f.label :mac_address, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :mac_address, :class => "form-control", :placeholder => "Mac Address", :readonly => true
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                %button.btn.btn-primary{:type => "submit"}= "Submit"
+                %button.btn.btn-default= "Cancel" 
+  %div.col-lg-6
+    .panel.panel-default
+      .panel-heading
+        %h4#tables= "Settings"
+      .panel-body
+        = form_for @device, :html => { :class => "form-horizontal" } do |f|
+          %fieldset
+            .form-group{:class => @device.errors[:loop_timeout].any? ? "has-error" : ""}
+              = f.label :loop_timeout, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :loop_timeout, :class => "form-control", :placeholder => "Timeout in milliseconds"
+            .form-group{:class => @device.errors[:notification_timeout].any? ? "has-error" : ""}
+              = f.label :notification_timeout, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :notification_timeout, :class => "form-control", :placeholder => "Timeout in seconds"
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                %button.btn.btn-primary{:type => "submit"}= "Submit"
+                %button.btn.btn-default= "Cancel" 
+
+.row
+  %div.col-lg-12
+    .panel.panel-default
+      .panel-heading
+        %h4#tables= "Events"
+      .panel-body
+        %div.bs-example.table-responsive
+          %table.table.table-striped.table-hover
+            %tbody
+              %tr
+                %th= "ID"
+                %th= "Title"
+                %th= "Description"
+                %th= "Time"
+              - @device.events.each do |event|
+                %tr>
+                  %td= link_to event.id, "#"
+                  %td= link_to event.title, "#"
+                  %td= event.description
+                  %td= l(event.created_at, :format => :standard)
+

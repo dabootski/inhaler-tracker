@@ -1,0 +1,36 @@
+:javascript
+  jQuery(document).ready(function() {
+    function AppViewModel() {
+      this.events = ko.observableArray();
+    }
+  
+    function DeviceEvent(data) {
+      this.title = data.title;
+    }
+  
+    var model = new AppViewModel();
+  
+    // Activates knockout.js
+    ko.applyBindings(model);
+  
+    setTimeout(function() {
+      var source = new EventSource("/api/streaming/devices/1/events.json");
+      source.addEventListener('refresh', function(e) {
+        var data = $.parseJSON(e.data);
+        var events = $.parseJSON(data.events);
+        var list = [];
+  
+        $.each(events, function(idx, ev) {
+          list.push(new DeviceEvent(ev));
+        });
+  
+        model.events(list);
+      });
+    }, 1);
+  });
+= @device.name
+%ul{"data-bind" => "foreach: events()"}
+  %li
+    %span{"data-bind" => "text: title"}
+      |
+      %span{"data-bind" => "text: description"}

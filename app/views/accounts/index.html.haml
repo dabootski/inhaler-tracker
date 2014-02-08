@@ -1,0 +1,24 @@
+.row
+  %div.col-lg-12
+    %ul.breadcrumb
+      %li
+        = link_to "Home", root_url
+      %li.active= "Accounts"
+    .page-header
+      %h1#tables= "Accounts"
+  
+    %div.bs-example.table-responsive
+      %table.table.table-striped.table-hover
+        %tbody
+          %tr
+            %th= "ID"
+            %th= "Name"
+            %th= "Email"
+            %th= "Phone"
+          - @accounts.each do |account|
+            %tr>
+              %td= link_to account.id, account
+              %td= link_to account.full_name, account
+              %td= account.email
+              %td= account.phone
+

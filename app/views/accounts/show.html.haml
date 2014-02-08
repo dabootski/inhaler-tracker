@@ -1,0 +1,52 @@
+.row
+  %div.col-lg-12
+    %ul.breadcrumb
+      %li
+        = link_to "Home", root_url
+      %li
+        = link_to "Accounts", accounts_url
+      %li.active= @account.username
+    .page-header
+      %h1#tables= "Accounts - #{@account.username}"
+
+  %div.col-lg-6
+    .panel.panel-default
+      .panel-heading
+        %h4#tables= "Personal Information"
+      .panel-body
+        = form_for @account, :html => { :class => "form-horizontal" } do |f|
+          %fieldset
+            .form-group
+              = f.label :username, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :username, :class => "form-control", :placeholder => "Username"
+            .form-group
+              = f.label :email, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :email, :class => "form-control", :placeholder => "Email"
+            .form-group
+              = f.label :phone, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :phone, :class => "form-control", :placeholder => "Phone"
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                %button.btn.btn-primary{:type => "submit"}= "Submit"
+                %button.btn.btn-default= "Cancel" 
+  %div.col-lg-6
+    .panel.panel-default
+      .panel-heading
+        %h4#tables= "Devices"
+      .panel-body
+        %div.bs-example.table-responsive
+          %table.table.table-striped.table-hover
+            %tbody
+              %tr
+                %th= "ID"
+                %th= "Name"
+                %th= "Mac Address"
+              - @account.devices.each do |device|
+                %tr>
+                  %td= link_to device.id, device
+                  %td= link_to device.name, device
+                  %td= device.mac_address
+
