@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :devices do
     resources :events
     resources :email_notifications
+    resources :text_notifications
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

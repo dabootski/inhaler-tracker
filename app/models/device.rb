@@ -17,6 +17,8 @@ class Device < ActiveRecord::Base
   has_many :notifications
   has_many :email_notifications,
     :source => "EmailNotification"
+  has_many :text_notifications,
+    :source => "TextNotification"
 
   validates :name, :presence => true
   validates :mac_address, :presence => true

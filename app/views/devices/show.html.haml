@@ -70,11 +70,11 @@
                   %td= n.display_name
                   %td= n.name
                   %td= n.active?
-                  %td= link_to "Settings", edit_device_email_notification_path(@device, n)
+                  %td= link_to "Settings", edit_polymorphic_path([@device, n])
         %div
           = link_to "New Email Notification", new_device_email_notification_path(@device)
           %br
-          = link_to "New Text Notification", new_device_email_notification_path(@device)
+          = link_to "New Text Notification", new_device_text_notification_path(@device)
 
   %div.col-lg-6
     .panel.panel-default
