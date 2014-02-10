@@ -16,7 +16,7 @@ class EventProcessor
       puts "***************************"
 
       DeviceOutOfRangeHandler.new(@event).handle
-    elsif @event.title == "In range"
+    elsif @event.title == "In Range"
       puts "***************************"
       puts "WITHIN RANGE HANDLER CALLED"
       puts "***************************"
