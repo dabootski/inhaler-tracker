@@ -5,6 +5,10 @@ class DeviceWithinRangeHandler
   end
 
   def handle
+    puts "***************************"
+    puts "SETTING WITHIN RANGE TO TRUE!"
+    puts "***************************"
+
     @event.device.update!(
       :within_range => true
     )
