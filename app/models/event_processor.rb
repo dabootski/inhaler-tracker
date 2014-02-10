@@ -15,13 +15,13 @@ class EventProcessor
       puts "OUT OF RANGE HANDLER CALLED"
       puts "***************************"
 
-      DeviceOutOfRangeHandler.new.handle(@event)
+      DeviceOutOfRangeHandler.new(@event).handle
     elsif @event.title == "In range"
       puts "***************************"
       puts "WITHIN RANGE HANDLER CALLED"
       puts "***************************"
 
-      DeviceWithinRangeHandler.new.handle(@event)
+      DeviceWithinRangeHandler.new(@event).handle
     end
   end
 
