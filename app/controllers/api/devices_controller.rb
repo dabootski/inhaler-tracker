@@ -21,10 +21,12 @@ module Api
     def create_event
       @device = Device.find(params[:id])
 
-      @device.events.create!(
+      event = @device.events.create!(
         :title => params[:title],
         :description => params[:description]
       )
+
+      EventProcessor.new(event).handle
 
       render :nothing => true, :status => 200
     end
