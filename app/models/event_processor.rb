@@ -5,21 +5,21 @@ class EventProcessor
   end
 
   def handle
-    logger.fatal "***************************"
-    logger.fatal "HANDLING EVENT: #{@event.inspect}"
-    logger.fatal "***************************"
+    puts "***************************"
+    puts "HANDLING EVENT: #{@event.inspect}"
+    puts "***************************"
 
     # Pass event off to handlers based on event name/title
     if @event.title == "Out of range"
-      logger.fatal "***************************"
-      logger.fatal "OUT OF RANGE HANDLER CALLED"
-      logger.fatal "***************************"
+      puts "***************************"
+      puts "OUT OF RANGE HANDLER CALLED"
+      puts "***************************"
 
       DeviceOutOfRangeHandler.new.handle(@event)
     elsif @event.title == "In range"
-      logger.fatal "***************************"
-      logger.fatal "WITHIN RANGE HANDLER CALLED"
-      logger.fatal "***************************"
+      puts "***************************"
+      puts "WITHIN RANGE HANDLER CALLED"
+      puts "***************************"
 
       DeviceWithinRangeHandler.new.handle(@event)
     end
