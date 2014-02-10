@@ -1,6 +1,6 @@
 class EventProcessor
 
-  def intitialize(event)
+  def initialize(event)
     @event = event
   end
 
