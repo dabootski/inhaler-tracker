@@ -10,6 +10,7 @@ namespace :notifications do
         next unless device.within_range?
 
         device.notifications.each do |n|
+          puts "LAST OUT OF RANGE: #{device.last_out_of_range}"
           seconds_within_range = Time.now - device.last_out_of_range
 
           puts "SECONDS WITHIN RANGE: #{seconds_within_range}"
