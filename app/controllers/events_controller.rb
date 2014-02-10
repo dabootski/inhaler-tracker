@@ -11,6 +11,10 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.json do
         if @event.save
+          puts "***************************"
+          puts "HANDING OFF TO EVENT PROCESSOR: #{@event.inspect}"
+          puts "***************************"
+
           EventProcessor.new(@event).handle
           render :json => @event, :status => :created
         else
