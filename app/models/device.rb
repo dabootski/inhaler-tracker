@@ -27,6 +27,8 @@ class Device < ActiveRecord::Base
   validates :settings_refresh_timeout, :presence => true
   validates :range_threshold, :presence => true
 
+  before_save :set_last_out_of_range
+
   store_accessor :settings,
     :loop_timeout,
     :notification_timeout,
@@ -37,6 +39,11 @@ class Device < ActiveRecord::Base
     settings.keys.map do |k|
       "#{k}:#{settings[k]}"
     end.join(":")
+  end
+
+  private
+  def set_last_out_of_range
+    last_out_of_range = Time.now
   end
 
 end

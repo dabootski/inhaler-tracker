@@ -30,6 +30,10 @@
           = f.label :name, :class => "col-lg-2 control-label"
           .col-lg-10
             = f.text_field :name, :class => "form-control", :placeholder => "Notification name"
+        .form-group{:class => @notification.errors[:max_seconds_within_range].any? ? "has-error" : ""}
+          = f.label :max_seconds_within_range, :class => "col-lg-2 control-label"
+          .col-lg-10
+            = f.text_field :max_seconds_within_range, :class => "form-control", :placeholder => "Maximum seconds object can be in range before notification is sent"
         .form-group{:class => @notification.errors[:active].any? ? "has-error" : ""}
           = f.label :active, :class => "col-lg-2 control-label"
           .col-lg-10
@@ -37,11 +41,15 @@
         .form-group{:class => @notification.errors[:timeout].any? ? "has-error" : ""}
           = f.label :timeout, :class => "col-lg-2 control-label"
           .col-lg-10
-            = f.text_field :timeout, :class => "form-control", :placeholder => "Time between notifications in minutes"
+            = f.text_field :timeout, :class => "form-control", :placeholder => "Time between notifications in seconds"
         .form-group{:class => @notification.errors[:phone].any? ? "has-error" : ""}
           = f.label :phone, :class => "col-lg-2 control-label"
           .col-lg-10
-            = f.text_field :phone, :class => "form-control", :placeholder => "Time between notifications in minutes"
+            = f.text_field :phone, :class => "form-control", :placeholder => "Phone # that text will be sent to"
+        .form-group{:class => @notification.errors[:message].any? ? "has-error" : ""}
+          = f.label :message, :class => "col-lg-2 control-label"
+          .col-lg-10
+            = f.text_field :message, :class => "form-control", :placeholder => "Message that will be sent"
         .form-group
           .col-lg-10.col-lg-offset-2
             %button.btn.btn-primary{:type => "submit"}= "Submit"

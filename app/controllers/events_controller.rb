@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.json do
         if @event.save
+          EventProcessor.new(@event).handle
           render :json => @event, :status => :created
         else
           render :json => @event.errors, :status => :unprocessable_entity

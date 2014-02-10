@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208165902) do
+ActiveRecord::Schema.define(version: 20140210060228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20140208165902) do
     t.json     "settings"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_out_of_range"
+    t.boolean  "within_range",      default: false
   end
 
   create_table "events", force: true do |t|
@@ -42,12 +44,21 @@ ActiveRecord::Schema.define(version: 20140208165902) do
   end
 
   create_table "notifications", force: true do |t|
-    t.integer  "device_id",                  null: false
-    t.string   "type",                       null: false
-    t.string   "name",                       null: false
-    t.boolean  "active",     default: false
-    t.integer  "timeout",                    null: false
+    t.integer  "device_id",                                null: false
+    t.string   "type",                                     null: false
+    t.string   "name",                                     null: false
+    t.boolean  "active",                   default: false
+    t.integer  "timeout",                                  null: false
     t.json     "settings"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "last_notified"
+    t.datetime "last_notified_at"
+    t.integer  "max_seconds_within_range",                 null: false
+  end
+
+  create_table "sent_notifications", force: true do |t|
+    t.integer  "notification_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

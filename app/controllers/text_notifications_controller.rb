@@ -46,6 +46,8 @@ class TextNotificationsController < ApplicationController
       permit(
         :name,
         :active,
+        :max_seconds_within_range,
+        :message,
         :timeout,
         :phone
       )

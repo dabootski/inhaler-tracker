@@ -45,6 +45,8 @@ gem 'html2haml'
 
 gem 'rails_12factor', group: :production
 
+gem 'twilio-ruby'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
