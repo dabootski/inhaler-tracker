@@ -119,7 +119,7 @@
                 %th= "Title"
                 %th= "Description"
                 %th= "Time"
-              - @device.events.each do |event|
+              - @device.important_events.each do |event|
                 %tr>
                   %td= link_to event.title, "#"
                   %td= event.description
