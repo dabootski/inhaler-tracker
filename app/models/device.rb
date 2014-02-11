@@ -41,6 +41,20 @@ class Device < ActiveRecord::Base
     end.join(":")
   end
 
+  def last_synced_at
+    last_settings_event = events.settings_sync.first
+
+    if last_settings_event
+      last_settings_event.created_at
+    else
+      nil
+    end
+  end
+
+  def important_events
+    events.important
+  end
+
   private
   def set_last_out_of_range
     last_out_of_range = Time.now

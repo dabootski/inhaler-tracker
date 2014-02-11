@@ -79,6 +79,8 @@
   %div.col-lg-6
     .panel.panel-default
       .panel-heading
+        - if @device.last_synced_at
+          %span.additional-heading= "Last synced: #{l(@device.last_synced_at, :format => :standard)}"
         %h4#tables= "Settings"
       .panel-body
         = form_for @device, :html => { :class => "form-horizontal" } do |f|

@@ -9,4 +9,8 @@ class Event < ActiveRecord::Base
 
   belongs_to :device
 
+  scope :settings_sync, -> { where("title = 'Settings synced'") }
+
+  scope :important, -> { where("title != 'Settings synced'") }
+
 end

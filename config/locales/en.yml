@@ -23,4 +23,4 @@ en:
   hello: "Hello world"
   time:
     formats:
-      standard: '%d/%m/%Y %l:%M%P'
+      standard: '%m/%d/%Y %l:%M%P'
